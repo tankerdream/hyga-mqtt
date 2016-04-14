@@ -19,11 +19,14 @@ class Hyga extends EventEmitter2
       password: options.token
       reconnectPeriod: 5000
     @options = _.defaults options, defaults
+    @messageCallbacks = {}
 
   connect: (callback=->) =>
     uri = @_buildUri()
     @client = @mqtt.connect uri, @options
     @client.on 'error', @_errorHandler
+
+    @on 'error',=>
 
     @client.once 'connect', =>
       response = _.pick @options, 'uuid', 'token'
@@ -50,12 +53,6 @@ class Hyga extends EventEmitter2
   message: (params) =>
     @publish 'message', params
 
-  subscribe: (params) =>
-    @client.subscribe params
-
-  unsubscribe: (params) =>
-    @client.unsubscribe params
-
   update: (data, fn=->) =>
     @publish 'update', data, fn
 
@@ -80,18 +77,17 @@ class Hyga extends EventEmitter2
     url.format uriOptions
 
   _errorHandler: (error,data) =>
-    @onError(error,data)
+    @emit 'error', error, data
 
   _messageHandler: (uuid, message) =>
-    message = message.toString()
     try
       message = JSON.parse message
     catch error
       debug 'unable to parse message', message
 
-    debug '_messageHandler', message.topic, message.data
-    return if @handleCallbackResponse message
-    return @emit message.topic, message.data
+    debug '_messageHandler', message.type, message
+    return if @handleCallbackResponse message.payload
+    return @emit message.type, message.payload
 
   handleCallbackResponse: (message) =>
     id = message._request?.callbackId
