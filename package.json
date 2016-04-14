@@ -1,0 +1,23 @@
+{
+  "name": "hyga-mqtt",
+  "version": "1.0.0",
+  "description": "HyperGalaxy MQTT Client.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tankerdream/hyga-mqtt.git"
+  },
+  "keywords": [
+    "mqtt",
+    "hyga"
+  ],
+  "author": "tankerDream",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tankerdream/hyga-mqtt/issues"
+  },
+  "homepage": "https://github.com/tankerdream/hyga-mqtt#readme"
+}
