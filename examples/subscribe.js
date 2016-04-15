@@ -19,13 +19,6 @@ hyga.connect(function(response){
 
   console.log('ready');
 
-  // Message - response emits event 'message'
-  // var message = {
-  //   devices: ['3e9fd243-2d75-42a4-89b9-a4e70a51b58d'],
-  //   topic: 'hello',
-  //   payload: {ilove: 'food'},
-  //   other: '林允儿'
-  // };
   hyga.subscribe('message');
-  
+
 });

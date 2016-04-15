@@ -53,6 +53,9 @@ class Hyga extends EventEmitter2
   message: (params) =>
     @publish 'message', params
 
+  broadcast: (params) =>
+    @publish 'broadcast', params
+
   update: (data, fn=->) =>
     @publish 'update', data, fn
 
