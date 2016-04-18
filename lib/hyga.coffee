@@ -35,7 +35,7 @@ class Hyga extends EventEmitter2
 
     @client.on 'message', @_messageHandler
 
-  publish: (topic, data, fn=->) =>
+  publish: (topic, data, fn) =>
     throw new Error 'No Active Connection' unless @client?
 
     if !data
@@ -43,8 +43,9 @@ class Hyga extends EventEmitter2
     else if _.isString data
       dataString = data
     else
-      data.callbackId = nodeUuid.v1();
-      @messageCallbacks[data.callbackId] = fn;
+      if _.isFunction(fn)
+        data.callbackId = nodeUuid.v1();
+        @messageCallbacks[data.callbackId] = fn;
       dataString = JSON.stringify(data)
     debug 'publish', topic, dataString
     @client.publish topic, dataString
@@ -55,6 +56,12 @@ class Hyga extends EventEmitter2
 
   broadcast: (params) =>
     @publish 'broadcast', params
+
+  subBroadcast: (params) =>
+    @publish 'subBroadcast', params
+
+  unsubBroadcast: (params) =>
+    @publish 'unsubBroadcast', params
 
   update: (data, fn=->) =>
     @publish 'update', data, fn
