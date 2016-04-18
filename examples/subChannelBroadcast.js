@@ -11,12 +11,14 @@ hyga.on('error',function(error){
   console.error(error);
 });
 
-hyga.on('message',function(data){
+hyga.on('broadcast',function(data){
   console.log(data);
 });
 
 hyga.connect(function(response){
 
   console.log('ready');
+
+  hyga.subBroadcast();
 
 });

@@ -57,7 +57,7 @@ class Hyga extends EventEmitter2
   broadcast: (params) =>
     @publish 'broadcast', params
 
-  subBroadcast: (params) =>
+  subBroadcast: (params = {h:'%'}) =>
     @publish 'subBroadcast', params
 
   unsubBroadcast: (params) =>

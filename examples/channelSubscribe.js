@@ -1,8 +1,8 @@
 var Hyga = require('../');
 
 var config = {
-  uuid:'3e9fd243-2d75-42a4-89b9-a4e70a51b58d',
-  token:'31b5ee84aff6e4fb2db70d1d2fe43f6e58e7ec6d'
+  uuid:'e91a0b58-3899-42f2-a667-74da0405a5d8',
+  token:'20552f1ed1e360574e011a96ad059958261a09a8'
 }
 
 var hyga = new Hyga(config);
