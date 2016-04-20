@@ -7,14 +7,6 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
-hyga.on('message',function(data){
-  console.log(data);
-});
-
 hyga.connect(function(response){
 
   console.log('ready');

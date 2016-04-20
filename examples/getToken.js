@@ -20,14 +20,13 @@ hyga.connect(function(response){
     uuid: '9c417707-420d-4ff1-95b5-dfe9171d5cba'
   }
 
-  hyga.getToken(targetDevice, function(success,res){
+  hyga.getToken(targetDevice, function(success,resp){
     if(success){
       console.log('Get the new token:');
-      console.log(res);
     }else{
       console.log('Error!');
-      console.log(res);
     }
+    console.log(resp);
     process.exit();
   });
 

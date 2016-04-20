@@ -32,21 +32,18 @@ class Hyga extends EventEmitter2
       @client.on 'message', @_messageHandler
       callback response
 
-  publish: (topic, data, fn) =>
+  publish: (topic, data = {}, fn) =>
     throw new Error 'No Active Connection' unless @client?
 
-    if !data
-      dataString = {}
-    else if _.isString data
-      dataString = data
-    else
-#      TODO 暂时没必要判断,为将来添加ack参考格式
-      if _.isFunction(fn)
-        data.callbackId = nodeUuid.v1();
-        @messageCallbacks[data.callbackId] = fn;
-      dataString = JSON.stringify(data)
-    debug 'publish', topic, dataString
-    @client.publish topic, dataString
+    message = {}
+    message.payload = data
+
+    message.callbackId = nodeUuid.v1();
+    @messageCallbacks[message.callbackId] = fn;
+
+    messageString = JSON.stringify(message)
+    debug 'publish', topic, messageString
+    @client.publish topic, messageString
 
   # API Functions
   message: (params, fn=->) =>

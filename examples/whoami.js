@@ -7,23 +7,18 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
-hyga.on('whoami',function(res){
-  console.log('On');
-  console.log(res);
-})
 hyga.connect(function(response){
 
   console.log('ready');
 
-  hyga.whoami();
+  hyga.whoami(function(success, resp){
+    if(success){
+      console.log('I am');
+    }else{
+      console.log('Error!');
+    }
+    console.log(resp);
+    process.exit();
+  });
 
-  //function(res){
-  //  console.log('Hello, I am');
-  //  console.log(res);
-  //  process.exit();
-  //}
 });

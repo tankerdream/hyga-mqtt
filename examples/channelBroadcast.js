@@ -8,10 +8,6 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
 hyga.connect(function(response){
 
   console.log('ready');
@@ -21,6 +17,14 @@ hyga.connect(function(response){
     payload: {from: '频道广播'},
   };
 
-  hyga.broadcast(message);
+  hyga.broadcast(message,function(success, resp){
+    if(success){
+      console.log('广播成功!');
+    }else{
+      console.log('广播失败!');
+      console.log(resp);
+    }
+    process.exit();
+  });
 
 });

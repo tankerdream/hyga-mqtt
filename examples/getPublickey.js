@@ -7,10 +7,6 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
 hyga.connect(function(response){
 
   console.log('ready');
@@ -22,11 +18,10 @@ hyga.connect(function(response){
   hyga.getPublicKey(targetDevice, function(success,res){
     if(success){
       console.log('Get PublicKey:');
-      console.log(res);
     }else{
       console.log('Error!');
-      console.log(res);
     }
+    console.log(res);
     process.exit();
   });
 

@@ -15,18 +15,16 @@ hyga.connect(function(response){
 
   console.log('ready');
 
-  // Message - response emits event 'message'
-  var message = {
-    devices: '3e9fd243-2d75-42a4-89b9-a4e70a51b58d',
-    payload: {ilove: 'food'},
-    other: '林允儿'
-  };
+  var data = {
+      publicKey:'36.5',
+      publicName:'体温'
+  }
 
-  hyga.message(message,function(success, resp){
+  hyga.update(data,function(success, resp){
     if(success){
-      console.log('发送成功!');
+      console.log('设置成功!');
     }else{
-      console.log('发送失败!');
+      console.log('设置失败!');
       console.log(resp);
     }
     process.exit();
