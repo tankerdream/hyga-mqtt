@@ -61,6 +61,9 @@ class Hyga extends EventEmitter2
   update: (data, fn=->) =>
     @publish 'update', data, fn
 
+  updateList: (data, fn=->) =>
+    @publish 'updateList', data, fn
+
   getPublicKey: (data, fn=->) =>
     @publish 'getPublicKey', data, fn
 
