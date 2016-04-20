@@ -25,15 +25,12 @@ class Hyga extends EventEmitter2
     uri = @_buildUri()
     @client = @mqtt.connect uri, @options
     @client.on 'error', @_errorHandler
-
-    @on 'error',=>
-
+    @setErrorHandler()
     @client.once 'connect', =>
       response = _.pick @options, 'uuid', 'token'
       @client.subscribe @options.uuid, qos: @options.qos
+      @client.on 'message', @_messageHandler
       callback response
-
-    @client.on 'message', @_messageHandler
 
   publish: (topic, data, fn) =>
     throw new Error 'No Active Connection' unless @client?
@@ -43,6 +40,7 @@ class Hyga extends EventEmitter2
     else if _.isString data
       dataString = data
     else
+#      TODO 暂时没必要判断,为将来添加ack参考格式
       if _.isFunction(fn)
         data.callbackId = nodeUuid.v1();
         @messageCallbacks[data.callbackId] = fn;
@@ -51,32 +49,47 @@ class Hyga extends EventEmitter2
     @client.publish topic, dataString
 
   # API Functions
-  message: (params) =>
-    @publish 'message', params
+  message: (params, fn=->) =>
+    @publish 'message', params, fn
 
-  broadcast: (params) =>
-    @publish 'broadcast', params
+  broadcast: (params, fn=->) =>
+    @publish 'broadcast', params, fn
 
-  subBroadcast: (params = {h:'%'}) =>
-    @publish 'subBroadcast', params
+  subBroadcast: (params, fn=->) =>
+    @publish 'subBroadcast', params, fn
 
-  unsubBroadcast: (params) =>
-    @publish 'unsubBroadcast', params
+  unsubBroadcast: (params, fn=->) =>
+    @publish 'unsubBroadcast', params, fn
 
   update: (data, fn=->) =>
     @publish 'update', data, fn
 
-  resetToken: (data, fn=->) =>
-    @publish 'resetToken', data, fn
-
   getPublicKey: (data, fn=->) =>
     @publish 'getPublicKey', data, fn
 
-  generateAndStoreToken: (data, fn=->) =>
-    @publish 'generateAndStoreToken', data, fn
+  getToken: (data, fn=->) =>
+    @publish 'getToken', data, fn
 
   whoami: (fn=->) =>
     @publish 'whoami', {}, fn
+
+  setMessageHandler: (fn=@defaultHandler) =>
+    @on 'message', fn
+
+  setConfigHandler: (fn=@defaultHandler) =>
+    @on 'config', fn
+
+  setDataHandler: (fn=@defaultHandler) =>
+    @on 'data', fn
+
+  setBroadcastHandler: (fn=@defaultHandler) =>
+    @on 'broadcast', fn
+
+  setErrorHandler: (fn=@defaultHandler) =>
+    @on 'error', fn
+
+  defaultHandler: (message) =>
+    console.log message
 
   # Private Functions
   _buildUri: =>
@@ -95,16 +108,15 @@ class Hyga extends EventEmitter2
     catch error
       debug 'unable to parse message', message
 
-    debug '_messageHandler', message.type, message
-    return if @handleCallbackResponse message.payload
+    debug '_messageHandler', message
+    return @handleCallbackResponse message if message._callbackId?
     return @emit message.type, message.payload
 
   handleCallbackResponse: (message) =>
-    id = message._request?.callbackId
-    return false unless id?
+    id = message._callbackId
+    debug 'handleCallbackResponse', id
     callback = @messageCallbacks[id] ? ->
-    callback message.data if message.topic == 'error'
-    callback null, message.data if message.topic != 'error'
+    callback message.success, message.payload
     delete @messageCallbacks[id]
     return true
 

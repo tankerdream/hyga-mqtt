@@ -16,11 +16,19 @@ hyga.connect(function(response){
 
   console.log('ready');
 
-  // Message - response emits event 'message'
-  var message = {
-    payload: {from: '频道广播'},
-  };
+  var targetDevice = {
+    uuid: '9c417707-420d-4ff1-95b5-dfe9171d5cba'
+  }
 
-  hyga.broadcast(message);
+  hyga.getToken(targetDevice, function(success,res){
+    if(success){
+      console.log('Get the new token:');
+      console.log(res);
+    }else{
+      console.log('Error!');
+      console.log(res);
+    }
+    process.exit();
+  });
 
 });
