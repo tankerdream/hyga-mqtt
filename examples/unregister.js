@@ -7,15 +7,19 @@ var config = {
 
 var hyga = new Hyga(config);
 
+var message = {
+  uuid:'75d09bf7-788c-45e4-8f92-04a124f69f86'
+};
+
 hyga.connect(function(response){
 
   console.log('ready');
 
-  hyga.whoAmI(function(success, resp){
+  hyga.unregister(message, function(success, resp){
     if(success){
-      console.log('I am');
+      console.log('注销成功!');
     }else{
-      console.log('Error!');
+      console.log('注销失败!');
     }
     console.log(resp);
     process.exit();

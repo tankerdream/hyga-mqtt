@@ -64,20 +64,23 @@ class Hyga extends EventEmitter2
   unsubBroadcast: (params, fn=->) =>
     @publish 'unsubBroadcast', params, fn
 
-  update: (data, fn=->) =>
+  update: (params, fn=->) =>
     @publish 'update', data, fn
 
-  updateList: (data, fn=->) =>
-    @publish 'updateList', data, fn
+  updateList: (params, fn=->) =>
+    @publish 'updateList', params, fn
 
-  getPublicKey: (data, fn=->) =>
-    @publish 'getPublicKey', data, fn
+  getPublicKey: (params, fn=->) =>
+    @publish 'getPublicKey', params, fn
 
-  getToken: (data, fn=->) =>
-    @publish 'getToken', data, fn
+  getToken: (params, fn=->) =>
+    @publish 'getToken', param, fn
 
-  whoami: (fn=->) =>
-    @publish 'whoami', {}, fn
+  whoAmI: (fn=->) =>
+    @publish 'whoAmI', {}, fn
+
+  unregister: (params, fn=->) =>
+    @publish 'unregister', params, fn
 
   setMessageHandler: (fn=@defaultHandler) =>
     @on 'message', fn

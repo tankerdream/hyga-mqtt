@@ -7,20 +7,23 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
 hyga.connect(function(response){
 
   console.log('ready');
 
-  // Message - response emits event 'message'
   var message = {
     payload: {to: '频道'},
     other: '林允儿'
   };
 
-  hyga.message(message);
+  hyga.message(message, function(success, resp){
+    if(success){
+      console.log('发送成功!');
+    }else{
+      console.log('发送失败!');
+      console.log(resp);
+    }
+    process.exit();
+  });
 
 });

@@ -18,11 +18,7 @@ var message = {
   ]
 };
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
-hyga.on('broadcast',function(data){
+hyga.setBroadcastHandler(function(data){
   console.log(data);
   console.log('退订广播消息...');
   hyga.unsubBroadcast(message);
@@ -32,6 +28,14 @@ hyga.connect(function(response){
 
   console.log('ready');
 
-  hyga.subBroadcast(message);
+  hyga.subBroadcast(message, function(success, resp){
+    if(success){
+      console.log('订阅广播成功!');
+    }else{
+      console.log('订阅失败');
+      console.log(resp);
+    }
+
+  });
 
 });

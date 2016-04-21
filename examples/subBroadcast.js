@@ -7,11 +7,8 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
-hyga.on('broadcast',function(data){
+hyga.setBroadcastHandler(function(data){
+  console.log('收到广播消息...');
   console.log(data);
 });
 

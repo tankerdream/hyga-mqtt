@@ -22,7 +22,7 @@ hyga.connect(function(response){
     other: '林允儿'
   };
 
-  hyga.message(message,function(success, resp){
+  hyga.message(message, function(success, resp){
     if(success){
       console.log('发送成功!');
     }else{

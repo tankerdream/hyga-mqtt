@@ -7,13 +7,21 @@ var config = {
 
 var hyga = new Hyga(config);
 
+hyga.on('error',function(error){
+  console.error(error);
+});
+
 hyga.connect(function(response){
 
   console.log('ready');
 
-  hyga.whoAmI(function(success, resp){
+  var data = {
+    color:'red'
+  }
+
+  hyga.devices(data, function(success,resp){
     if(success){
-      console.log('I am');
+      console.log('Get the devices:');
     }else{
       console.log('Error!');
     }
