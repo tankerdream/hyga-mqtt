@@ -16,11 +16,11 @@ hyga.connect(function(response){
   console.log('ready');
 
   var data = {
-      publicKey:'36.5',
+      publicKey:'37',
       publicName:'体温'
-  }
+  };
 
-  hyga.update(data,function(success, resp){
+  hyga.update(data, function(success, resp){
     if(success){
       console.log('设置成功!');
     }else{

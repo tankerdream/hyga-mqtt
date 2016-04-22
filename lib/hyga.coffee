@@ -65,7 +65,7 @@ class Hyga extends EventEmitter2
     @publish 'unsubBroadcast', params, fn
 
   update: (params, fn=->) =>
-    @publish 'update', data, fn
+    @publish 'update', params, fn
 
   updateList: (params, fn=->) =>
     @publish 'updateList', params, fn
@@ -74,7 +74,7 @@ class Hyga extends EventEmitter2
     @publish 'getPublicKey', params, fn
 
   getToken: (params, fn=->) =>
-    @publish 'getToken', param, fn
+    @publish 'getToken', params, fn
 
   whoAmI: (fn=->) =>
     @publish 'whoAmI', {}, fn

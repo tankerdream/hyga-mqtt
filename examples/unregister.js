@@ -8,7 +8,7 @@ var config = {
 var hyga = new Hyga(config);
 
 var message = {
-  uuid:'75d09bf7-788c-45e4-8f92-04a124f69f86'
+  uuid:'c42c9008-1007-4337-91fe-8515b41770ac'
 };
 
 hyga.connect(function(response){
