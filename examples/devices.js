@@ -21,9 +21,9 @@ hyga.connect(function(response){
 
   hyga.devices(data, function(success,resp){
     if(success){
-      console.log('Get the devices:');
+      console.log('找到设备:');
     }else{
-      console.log('Error!');
+      console.log('查询失败!');
     }
     console.log(resp);
     process.exit();

@@ -11,20 +11,20 @@ hyga.connect(function(response){
 
   console.log('ready');
 
-  var data = {
-    api:'push',
-    listName: 'discoverWhitelist',
-    list: 'demo-added-uuid'
-  };
+var data = {
+  api:'push',
+  listName: 'discoverWhitelist',
+  list: 'demo-added-uuid'
+};
 
-  hyga.updateList(data,function(success, resp){
-    if(success){
-      console.log('设置成功!');
-    }else{
-      console.log('设置失败!');
-      console.log(resp);
-    }
-    process.exit();
-  });
+hyga.updateList(data,function(success, resp){
+  if(success){
+    console.log('设置成功!');
+  }else{
+    console.log('设置失败!');
+    console.log(resp);
+  }
+  process.exit();
+});
 
 });

@@ -13,7 +13,7 @@ hyga.on('error',function(error){
 
 hyga.connect(function(response){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
   var data = {
     color:'red'
@@ -21,9 +21,9 @@ hyga.connect(function(response){
 
   hyga.device(data, function(success,resp){
     if(success){
-      console.log('Get the device:');
+      console.log('找到设备:');
     }else{
-      console.log('Error!');
+      console.log('查询失败!');
     }
     console.log(resp);
     process.exit();

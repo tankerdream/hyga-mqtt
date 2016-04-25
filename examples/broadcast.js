@@ -16,20 +16,23 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
 hyga.connect(function(response){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
-  // Message - response emits event 'message'
   var message = {
-    payload: {ilove: 'food'},
-    other: '林允儿'
+    payload: '我是超星系新成员.',
+    name: '森林火灾预警设备'
   };
 
-  hyga.broadcast(message);
+  hyga.broadcast(message, function(success, resp){
+    if(success){
+      console.log('广播成功!');
+    }else{
+      console.log('广播失败!');
+      console.log(resp);
+    }
+    process.exit();
+  });
 
 });

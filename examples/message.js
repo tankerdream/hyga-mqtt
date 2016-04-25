@@ -7,29 +7,27 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.setMessageHandler(function(message){
-  console.log(message);
-});
+hyga.connect(function(success){
 
-hyga.connect(function(response){
+  if(success){
+    console.log('已接入超星系!');
 
-  console.log('ready');
+    var message = {
+      devices: '3e9fd243-2d75-42a4-89b9-a4e70a51b58d',
+      payload: '欢迎来到超星系!',
+      from: '——超星系全体伙伴.'
+    };
 
-  // Message - response emits event 'message'
-  var message = {
-    devices: '3e9fd243-2d75-42a4-89b9-a4e70a51b58d',
-    payload: {ilove: 'food'},
-    other: '林允儿'
-  };
+    hyga.message(message, function(success, resp){
+      if(success){
+        console.log('发送成功!');
+      }else{
+        console.log('发送失败!');
+        console.log(resp);
+      }
+      process.exit();
+    });
 
-  hyga.message(message, function(success, resp){
-    if(success){
-      console.log('发送成功!');
-    }else{
-      console.log('发送失败!');
-      console.log(resp);
-    }
-    process.exit();
-  });
+  }
 
 });

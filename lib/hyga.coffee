@@ -27,10 +27,9 @@ class Hyga extends EventEmitter2
     @client.on 'error', @_errorHandler
     @setErrorHandler()
     @client.once 'connect', =>
-      response = _.pick @options, 'uuid', 'token'
       @client.subscribe @options.uuid, qos: @options.qos
       @client.on 'message', @_messageHandler
-      callback response
+      callback true
 
   publish: (topic, data = {}, fn) =>
     throw new Error 'No Active Connection' unless @client?

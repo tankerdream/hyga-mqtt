@@ -14,17 +14,17 @@ hyga.on('error',function(error){
 
 hyga.connect(function(response){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
   var targetDevice = {
-    uuid: '9c417707-420d-4ff1-95b5-dfe9171d5cba'
+    uuid: '3e9fd243-2d75-42a4-89b9-a4e70a51b58d'
   }
 
   hyga.getToken(targetDevice, function(success,resp){
     if(success){
-      console.log('Get the new token:');
+      console.log('获取token:');
     }else{
-      console.log('Error!');
+      console.log('获取失败!');
     }
     console.log(resp);
     process.exit();

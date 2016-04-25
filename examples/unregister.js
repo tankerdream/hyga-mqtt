@@ -7,15 +7,17 @@ var config = {
 
 var hyga = new Hyga(config);
 
-var message = {
-  uuid:'c42c9008-1007-4337-91fe-8515b41770ac'
-};
+
 
 hyga.connect(function(response){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
-  hyga.unregister(message, function(success, resp){
+  var targetDevice = {
+    uuid:'c42c9008-1007-4337-91fe-8515b41770ac'
+  };
+
+  hyga.unregister(targetDevice, function(success, resp){
     if(success){
       console.log('注销成功!');
     }else{

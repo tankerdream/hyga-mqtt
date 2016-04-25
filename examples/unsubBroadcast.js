@@ -21,7 +21,14 @@ var message = {
 hyga.setBroadcastHandler(function(data){
   console.log(data);
   console.log('退订广播消息...');
-  hyga.unsubBroadcast(message);
+  hyga.unsubBroadcast(message, function(success, resp){
+    if(success){
+      console.log('退订成功!');
+    }else{
+      console.log('退订失败!');
+      console.log(resp);
+    }
+  });
 });
 
 hyga.connect(function(response){
@@ -35,7 +42,6 @@ hyga.connect(function(response){
       console.log('订阅失败');
       console.log(resp);
     }
-
   });
 
 });
