@@ -15,7 +15,7 @@ hyga.connect(function(success){
     var message = {
       devices: '3e9fd243-2d75-42a4-89b9-a4e70a51b58d',
       payload: '欢迎来到超星系!',
-      from: '——超星系全体伙伴.'
+      from: '——超星系全体伙伴'
     };
 
     hyga.message(message, function(success, resp){

@@ -10,7 +10,7 @@ var hyga = new Hyga(config);
 
 hyga.connect(function(response){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
   // Message - response emits event 'message'
   var message = {

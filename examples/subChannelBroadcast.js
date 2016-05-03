@@ -17,7 +17,7 @@ hyga.on('broadcast',function(data){
 
 hyga.connect(function(response){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
   hyga.subBroadcast();
 
