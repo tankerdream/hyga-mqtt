@@ -82,19 +82,13 @@ class Hyga extends EventEmitter2
     @publish 'unregister', params, fn
 
   setMessageHandler: (fn=@defaultHandler) =>
-    @on 'message', fn
-
-  setConfigHandler: (fn=@defaultHandler) =>
-    @on 'config', fn
-
-  setDataHandler: (fn=@defaultHandler) =>
-    @on 'data', fn
+    @on 'msg', fn
 
   setBroadcastHandler: (fn=@defaultHandler) =>
-    @on 'broadcast', fn
+    @on 'brd', fn
 
   setErrorHandler: (fn=@defaultHandler) =>
-    @on 'error', fn
+    @on 'err', fn
 
   defaultHandler: (message) =>
     console.log message
@@ -118,13 +112,13 @@ class Hyga extends EventEmitter2
 
     debug '_messageHandler', message
     return @handleCallbackResponse message if message._callbackId?
-    return @emit message.type, message.payload
+    return @emit message.t, message.p
 
   handleCallbackResponse: (message) =>
     id = message._callbackId
     debug 'handleCallbackResponse', id
     callback = @messageCallbacks[id] ? ->
-    callback message.success, message.payload
+    callback message.s, message.p
     delete @messageCallbacks[id]
     return true
 
