@@ -11,23 +11,22 @@ hyga.setMessageHandler(function(message){
   console.log(message);
 });
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
   console.log('ready');
 
-  var data = {
-      publicKey:'37',
-      publicName:'体温'
-  };
+var data = {
+  "power" : 56
+};
 
-  hyga.update(data, function(success, resp){
-    if(success){
-      console.log('设置成功!');
-    }else{
-      console.log('设置失败!');
-      console.log(resp);
-    }
-    process.exit();
-  });
+hyga.update(data, function(status, payload){
+  if(success){
+    console.log('设置成功!');
+  }else{
+    console.log('设置失败!');
+    console.log(resp);
+  }
+  process.exit();
+});
 
 });

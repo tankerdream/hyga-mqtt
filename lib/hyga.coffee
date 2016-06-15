@@ -28,8 +28,8 @@ class Hyga extends EventEmitter2
     @setErrorHandler()
     @client.once 'connect', =>
       @client.subscribe @options.uuid, qos: @options.qos
-      @client.on 'message', @_messageHandler
-      callback true
+      callback()
+    @client.on 'message', @_messageHandler
 
   publish: (topic, data = {}, fn) =>
     throw new Error 'No Active Connection' unless @client?
@@ -66,8 +66,11 @@ class Hyga extends EventEmitter2
   update: (params, fn=->) =>
     @publish 'update', params, fn
 
-  updateList: (params, fn=->) =>
-    @publish 'updateList', params, fn
+  pushList: (params, fn=->) =>
+    @publish 'pushList', params, fn
+
+  pullList: (params, fn=->) =>
+    @publish 'pullList', params, fn
 
   getPublicKey: (params, fn=->) =>
     @publish 'getPublicKey', params, fn
@@ -97,12 +100,13 @@ class Hyga extends EventEmitter2
   _buildUri: =>
     uriOptions =
       protocol: 'mqtt'
-      hostname: 'localhost'
+      hostname: '127.0.0.1'
+#      hostname: '192.168.0.105'
       port: 1883
     url.format uriOptions
 
   _errorHandler: (error,data) =>
-    @emit 'error', error, data
+    @emit 'err', error, data
 
   _messageHandler: (uuid, message) =>
     try

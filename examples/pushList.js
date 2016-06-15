@@ -11,11 +11,18 @@ hyga.connect(function(){
 
   console.log('接入超星系!');
 
-  hyga.whoAmI(function(status, payload){
-    if(status){
-      console.log('成功!');
+  var data = {
+    listName: 'whiteList',
+    list: ['mqtt-demo-uuid-1','mqtt-demo-uuid-2']
+  };
+
+  hyga.pushList(data,function(success, resp){
+    if(success){
+      console.log('设置成功!');
+    }else{
+      console.log('设置失败!');
+      console.log(resp);
     }
-    console.log(payload);
     process.exit();
   });
 
