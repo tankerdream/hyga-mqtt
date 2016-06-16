@@ -7,20 +7,15 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.setMessageHandler(function(message){
-  console.log(message);
-});
-
 hyga.connect(function(){
 
   console.log('接入超星系!');
 
   var data = {
-    uuid:"3e9fd243-2d75-42a4-89b9-a4e70a51b58d",
-    sleep: false
+    list: ['mqtt-whiteList-1','mqtt-whiteList-2']
   };
 
-  hyga.update(data, function(status, payload){
+  hyga.pushWhiteList(data,function(success, resp){
     if(success){
       console.log('设置成功!');
     }else{

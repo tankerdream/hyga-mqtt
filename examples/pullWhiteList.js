@@ -7,19 +7,15 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.setMessageHandler(function(message){
-  console.log(message);
-});
-
 hyga.connect(function(){
 
-  console.log('ready');
+  console.log('接入超星系!');
 
 var data = {
-  power: 56
+  list: ['mqtt-whiteList-1','mqtt-whiteList-2']
 };
 
-hyga.update(data, function(status, payload){
+hyga.pullWhiteList(data,function(success, resp){
   if(success){
     console.log('设置成功!');
   }else{

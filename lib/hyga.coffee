@@ -66,11 +66,17 @@ class Hyga extends EventEmitter2
   update: (params, fn=->) =>
     @publish 'update', params, fn
 
-  pushList: (params, fn=->) =>
-    @publish 'pushList', params, fn
+  pushWhiteList: (params, fn=->) =>
+    @publish 'pushWhiteList', params, fn
 
-  pullList: (params, fn=->) =>
-    @publish 'pullList', params, fn
+  pullWhiteList: (params, fn=->) =>
+    @publish 'pullWhiteList', params, fn
+
+  pushBlackList: (params, fn=->) =>
+    @publish 'pushBlackList', params, fn
+
+  pullBlackList: (params, fn=->) =>
+    @publish 'pullBlackList', params, fn
 
   getPublicKey: (params, fn=->) =>
     @publish 'getPublicKey', params, fn
