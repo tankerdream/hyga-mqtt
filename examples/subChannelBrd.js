@@ -7,18 +7,14 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.on('error',function(error){
-  console.error(error);
-});
-
-hyga.on('broadcast',function(data){
+hyga.onBrd(function(data){
   console.log(data);
 });
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
   console.log('已接入超星系!');
 
-  hyga.subBroadcast();
+  hyga.subBrd();
 
 });

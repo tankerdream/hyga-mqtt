@@ -20,8 +20,8 @@ hyga.connect(function(){
     sleep: false
   };
 
-  hyga.update(data, function(status, payload){
-    if(success){
+  hyga.update(data, function(status){
+    if(status){
       console.log('设置成功!');
     }else{
       console.log('设置失败!');

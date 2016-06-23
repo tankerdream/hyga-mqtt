@@ -3,21 +3,20 @@ var Hyga = require('../');
 var config = {
   //频道的UUID及token
   uuid:'e91a0b58-3899-42f2-a667-74da0405a5d8',
-  token:'20552f1ed1e360574e011a96ad059958261a09a8'
+  token:'eca93fcff5cb940eaee51d0b8b3c3a5fbc9cef4a'
 }
 
 var hyga = new Hyga(config);
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
-  console.log('已接入超星系!');
+  console.log('频道已接入超星系!');
 
-  // Message - response emits event 'message'
   var message = {
     payload: {from: '频道广播'},
   };
 
-  hyga.broadcast(message,function(success, resp){
+  hyga.brd(message, function(success, resp){
     if(success){
       console.log('广播成功!');
     }else{

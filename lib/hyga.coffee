@@ -4,8 +4,6 @@ nodeUuid        = require 'node-uuid'
 {EventEmitter2} = require 'eventemitter2'
 debug           = require('debug')('hyga-mqtt')
 
-PROXY_EVENTS = ['close', 'error', 'reconnect', 'offline', 'pong', 'open', 'config', 'data']
-
 class Hyga extends EventEmitter2
   constructor: (options={}, dependencies={})->
     super wildcard: true
@@ -45,14 +43,14 @@ class Hyga extends EventEmitter2
     @client.publish topic, messageString
 
   # API Functions
-  message: (params, fn=->) =>
-    @publish 'message', params, fn
+  msg: (params, fn=->) =>
+    @publish 'msg', params, fn
 
-  broadcast: (params, fn=->) =>
-    @publish 'broadcast', params, fn
+  brd: (params, fn=->) =>
+    @publish 'brd', params, fn
 
-  subBroadcast: (params, fn=->) =>
-    @publish 'subBroadcast', params, fn
+  subBrd: (params, fn=->) =>
+    @publish 'subBrd', params, fn
 
   device: (params, fn=->) =>
     @publish 'device', params, fn
@@ -60,8 +58,8 @@ class Hyga extends EventEmitter2
   devices: (params, fn=->) =>
     @publish 'devices', params, fn
 
-  unsubBroadcast: (params, fn=->) =>
-    @publish 'unsubBroadcast', params, fn
+  unsubBrd: (params, fn=->) =>
+    @publish 'unsubBrd', params, fn
 
   update: (params, fn=->) =>
     @publish 'update', params, fn
@@ -81,8 +79,8 @@ class Hyga extends EventEmitter2
   getPublicKey: (params, fn=->) =>
     @publish 'getPublicKey', params, fn
 
-  getToken: (params, fn=->) =>
-    @publish 'getToken', params, fn
+  sesToken: (params, fn=->) =>
+    @publish 'sesToken', params, fn
 
   whoAmI: (fn=->) =>
     @publish 'whoAmI', {}, fn
@@ -90,10 +88,10 @@ class Hyga extends EventEmitter2
   unregister: (params, fn=->) =>
     @publish 'unregister', params, fn
 
-  setMessageHandler: (fn=@defaultHandler) =>
+  onMsg: (fn=@defaultHandler) =>
     @on 'msg', fn
 
-  setBroadcastHandler: (fn=@defaultHandler) =>
+  onBrd: (fn=@defaultHandler) =>
     @on 'brd', fn
 
   setErrorHandler: (fn=@defaultHandler) =>
@@ -107,7 +105,6 @@ class Hyga extends EventEmitter2
     uriOptions =
       protocol: 'mqtt'
       hostname: '127.0.0.1'
-#      hostname: '192.168.0.105'
       port: 1883
     url.format uriOptions
 

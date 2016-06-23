@@ -7,16 +7,14 @@ var config = {
 
 var hyga = new Hyga(config);
 
-var messageHandler = function(message){
+var msgHandler = function(message){
   console.log('收到消息:');
   console.log(message);
 }
 
-hyga.connect(function(success){
+hyga.connect(function(){
 
-  if(success){
-    console.log('已接入超星系!');
-    hyga.setMessageHandler(messageHandler);
-  }
+  console.log('已接入超星系!');
+  hyga.onMsg(msgHandler);
 
 });

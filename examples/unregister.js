@@ -1,29 +1,28 @@
 var Hyga = require('../');
 
+//频道uuid,即目标设备的父设备
 var config = {
-  uuid:'9c417707-420d-4ff1-95b5-dfe9171d5cba',
-  token:'52435eb0d78a761e1909793a6fdb15d4bf90570a'
+  uuid:'e91a0b58-3899-42f2-a667-74da0405a5d8',
+  token:'eca93fcff5cb940eaee51d0b8b3c3a5fbc9cef4a'
 }
 
 var hyga = new Hyga(config);
 
-
-
-hyga.connect(function(response){
+hyga.connect(function(){
 
   console.log('已接入超星系!');
 
-  var targetDevice = {
-    uuid:'c42c9008-1007-4337-91fe-8515b41770ac'
+  var toDevice = {
+    uuid:'59b6a5ff-fb27-4d73-afd8-01e24adba6e1'
   };
 
-  hyga.unregister(targetDevice, function(success, resp){
+  hyga.unregister(toDevice, function(success, resp){
     if(success){
-      console.log('注销成功!');
+      console.log('删除成功!');
     }else{
-      console.log('注销失败!');
+      console.log('删除失败!');
+      console.log(resp);
     }
-    console.log(resp);
     process.exit();
   });
 

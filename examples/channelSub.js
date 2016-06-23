@@ -3,18 +3,18 @@ var Hyga = require('../');
 var config = {
   //频道uuid
   uuid:'e91a0b58-3899-42f2-a667-74da0405a5d8',
-  token:'20552f1ed1e360574e011a96ad059958261a09a8'
+  token:'eca93fcff5cb940eaee51d0b8b3c3a5fbc9cef4a'
 }
 
 var hyga = new Hyga(config);
 
-hyga.setMessageHandler(function(message){
+hyga.onMsg(function(message){
   console.log('收到来自设备的消息...');
   console.log(message);
 });
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
-  console.log('ready');
+  console.log('频道已接入超星系!');
 
 });

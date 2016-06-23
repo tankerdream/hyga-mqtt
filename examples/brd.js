@@ -16,7 +16,7 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
   console.log('已接入超星系!');
 
@@ -25,7 +25,7 @@ hyga.connect(function(response){
     name: '森林火灾预警设备'
   };
 
-  hyga.broadcast(message, function(success, resp){
+  hyga.brd(message, function(success, resp){
     if(success){
       console.log('广播成功!');
     }else{

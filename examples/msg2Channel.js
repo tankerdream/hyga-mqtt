@@ -7,16 +7,16 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
   var message = {
     payload: {to: '频道'},
-    other: '林允儿'
+    from: 'Shine'
   };
 
-  hyga.message(message, function(success, resp){
+  hyga.msg(message, function(success, resp){
     if(success){
       console.log('发送成功!');
     }else{
