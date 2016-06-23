@@ -13,20 +13,20 @@ hyga.setMessageHandler(function(message){
 
 hyga.connect(function(){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
-var data = {
-  power: 56
-};
+  var params = {
+    power: 56
+  };
 
-hyga.update(data, function(status, payload){
-  if(success){
-    console.log('设置成功!');
-  }else{
-    console.log('设置失败!');
-    console.log(resp);
-  }
-  process.exit();
-});
+  hyga.update(params, function(success, payload){
+    if(success){
+      console.log('设置成功!');
+    }else{
+      console.log('设置失败!');
+      console.log(payload);
+    }
+    process.exit();
+  });
 
 });

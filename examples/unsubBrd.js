@@ -7,7 +7,7 @@ var config = {
 
 var hyga = new Hyga(config);
 
-var data = {
+var params = {
   uuids: [
     //同一频道中 authority='protect' 的设备
     '9c417707-420d-4ff1-95b5-dfe9171d5cba'
@@ -19,7 +19,7 @@ hyga.onBrd(function(message){
   console.log(message);
   console.log('退订广播消息...');
 
-  hyga.unsubBrd(data, function(success, resp){
+  hyga.unsubBrd(params, function(success, resp){
     if(success){
       console.log('退订成功!');
     }else{
@@ -34,7 +34,7 @@ hyga.connect(function(){
 
   console.log('频道已接入超星系!');
 
-  hyga.subBrd(data, function(success, resp){
+  hyga.subBrd(params, function(success, resp){
     if(success){
       console.log('订阅成功!');
     }else{

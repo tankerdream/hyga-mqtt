@@ -7,21 +7,21 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.connect(function(response){
+hyga.connect(function(){
 
-  console.log('ready');
+  console.log('已接入超星系!');
 
-  var targetDevice = {
+  var params = {
     uuid: '3e9fd243-2d75-42a4-89b9-a4e70a51b58d'
   }
 
-  hyga.getPublicKey(targetDevice, function(success,res){
+  hyga.getKey(params, function(success, payload){
     if(success){
-      console.log('Get PublicKey:');
+      console.log('获取成功.');
     }else{
-      console.log('Error!');
+      console.log('获取失败.');
     }
-    console.log(res);
+    console.log(payload);
     process.exit();
   });
 

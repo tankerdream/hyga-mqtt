@@ -91,6 +91,15 @@ class Hyga extends EventEmitter2
   onMsg: (fn=@defaultHandler) =>
     @on 'msg', fn
 
+  postData: (params, fn=->) =>
+    @publish 'postData', params, fn
+
+  putKey: (params, fn=->) =>
+    @publish 'putKey', params, fn
+
+  getKey: (params, fn=->) =>
+    @publish 'getKey', params, fn
+
   onBrd: (fn=@defaultHandler) =>
     @on 'brd', fn
 

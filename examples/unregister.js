@@ -16,12 +16,12 @@ hyga.connect(function(){
     uuid:'59b6a5ff-fb27-4d73-afd8-01e24adba6e1'
   };
 
-  hyga.unregister(toDevice, function(success, resp){
+  hyga.unregister(toDevice, function(success, payload){
     if(success){
       console.log('删除成功!');
     }else{
       console.log('删除失败!');
-      console.log(resp);
+      console.log(payload);
     }
     process.exit();
   });

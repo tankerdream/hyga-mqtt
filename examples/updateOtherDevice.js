@@ -7,10 +7,6 @@ var config = {
 
 var hyga = new Hyga(config);
 
-hyga.setMessageHandler(function(message){
-  console.log(message);
-});
-
 hyga.connect(function(){
 
   console.log('接入超星系!');
@@ -20,12 +16,12 @@ hyga.connect(function(){
     sleep: false
   };
 
-  hyga.update(data, function(status){
-    if(status){
+  hyga.update(data, function(success, payload){
+    if(success){
       console.log('设置成功!');
     }else{
       console.log('设置失败!');
-      console.log(resp);
+      console.log(payload);
     }
     process.exit();
   });

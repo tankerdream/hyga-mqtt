@@ -18,14 +18,14 @@ hyga.connect(function(){
 
   console.log('已接入超星系!');
 
-  var message = {
+  var params = {
     uuids: [
       //同一频道中 authority='protect' 的设备
       '9c417707-420d-4ff1-95b5-dfe9171d5cba'
     ]
   };
 
-  hyga.subBrd(message, function(success, resp){
+  hyga.subBrd(params, function(success, resp){
     if(success){
       console.log('订阅广播成功!');
     }else{
